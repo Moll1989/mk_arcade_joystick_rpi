@@ -205,7 +205,7 @@ static const char *mk_names[] = {
 
 /* GPIO UTILS */
 static void setGpioPullUps(int pullUps) {
-    *(gpio + 37) = 0x02;
+    *(gpio + 37) = 0x01;
     udelay(10);
     *(gpio + 38) = pullUps;
     udelay(10);
@@ -318,7 +318,7 @@ static void mk_gpio_read_packet(struct mk_pad * pad, unsigned char *data) {
     for (i = 0; i < mk_max_arcade_buttons; i++) {
         if(pad->gpio_maps[i] != -1){    // to avoid unused buttons
             int read = GPIO_READ(pad->gpio_maps[i]);
-            if (read == 0) data[i] = 1;
+            if (read == 1) data[i] = 1;
             else data[i] = 0;
         }else data[i] = 0;
     }
